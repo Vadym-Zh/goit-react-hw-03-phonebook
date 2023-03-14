@@ -4,7 +4,7 @@ import ContactsList from '../ContactsList/ContactsList';
 import Filter from '../Filter/Filter';
 import Form from '../Form/Form';
 import { nanoid } from 'nanoid';
-import css from './Phonebook.modules.css';
+import css from '../Phonebook/Phonebook.module.css';
 class Phonebook extends Component {
   state = {
     contacts: [
@@ -67,22 +67,24 @@ class Phonebook extends Component {
       return contact.name.toLowerCase().includes(normalizedFilter);
     });
     return (
-      <div className="container">
-        <Form onSubmit={this.onSubmit} />
-        <Filter
-          onFilter={this.onFilter}
-          type="text"
-          value={this.state.filter}
-          name="filter"
-          title=""
-          pattern=""
-        />
-        <ContactsList
-          title="Contacts"
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        ></ContactsList>
-      </div>
+      <>
+        <div className={css.wrap}>
+          <Form onSubmit={this.onSubmit} />
+          <Filter
+            onFilter={this.onFilter}
+            type="text"
+            value={this.state.filter}
+            name="filter"
+            title=""
+            pattern=""
+          />
+          <ContactsList
+            title="Contacts"
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          ></ContactsList>
+        </div>
+      </>
     );
   }
 }
