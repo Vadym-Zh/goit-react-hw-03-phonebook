@@ -24,11 +24,19 @@ class Phonebook extends Component {
 
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
-    if (this.state.contacts.length < 1) {
+    // console.log(contacts.length < 3);
+    // console.log(contacts.length);
+    // Якщо з локала приходить пустий рядок, кантакти беруться з json
+    if (contacts.length < 3) {
       this.setState({ contacts: contactsData });
+      // Якщо локалсторедж не пустий, контакти беруться з нього
     } else if (contacts !== null) {
       this.setState({ contacts: JSON.parse(contacts) });
     } else {
+      //
+      // } else if (this.state.contacts.length < 1) {
+      //   this.setState({ contacts: contactsData });
+      // } else {
       console.log('Відсутні контакти!');
     }
   }
