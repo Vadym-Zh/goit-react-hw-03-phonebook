@@ -24,12 +24,13 @@ class Phonebook extends Component {
 
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
-    // console.log(contacts.length < 3);
-    // console.log(contacts.length);
-    // Якщо з локала приходить пустий рядок, кантакти беруться з json
-    if (contacts.length < 3) {
+    // Перше завантаженн (пустий локалсторедж) контактів з json
+    if (contacts === null) {
       this.setState({ contacts: contactsData });
-      // Якщо локалсторедж не пустий, контакти беруться з нього
+      // Якщо всі контакти видалені (локалсторедж пустийрядок), контакти беруться з json
+    } else if (contacts.length < 3) {
+      this.setState({ contacts: contactsData });
+      // Якщо в локалсторедж є контакти. вони беруться з нього
     } else if (contacts !== null) {
       this.setState({ contacts: JSON.parse(contacts) });
     } else {
